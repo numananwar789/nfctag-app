@@ -30,7 +30,7 @@
                         <td>{{ $tag->user->name }}</td>
                         <td>{{ $tag->counter }}</td>
                         <td>
-                            <a href="{{ route('nfc-tags.show', $tag->uid) }}" class="btn btn-info btn-sm">View QR Code</a>
+                            <a href="{{ route('nfc-tags.show', $tag->id) }}" class="btn btn-info btn-sm">View QR Code</a>
                             <a href="{{ route('nfc-tags.edit', $tag->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('nfc-tags.destroy', $tag->id) }}" method="POST" style="display:inline;">
                                 @csrf

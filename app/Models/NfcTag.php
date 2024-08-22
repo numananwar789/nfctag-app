@@ -9,12 +9,7 @@ class NfcTag extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'uid',
-        'user_id',
-        'counter',
-    ];
-
+    protected $guarded = [];
     // Define relationship with User model
     public function user()
     {
