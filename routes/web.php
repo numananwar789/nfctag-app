@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\NfcTagController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\NfcAccessLogController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\QrRegisterController;
 use App\Http\Controllers\UidMappingController;
+use App\Http\Controllers\NfcAccessLogController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,11 +16,21 @@ Route::get('/', function () {
 
 Route::get('/access', [AccessController::class, 'validateNFC']);
 
+// Authentication
+Route::get('scan-code/create', [AuthController::class, 'scan_code'])->name('scan-code.create');
+Route::post('register/store', [AuthController::class, 'register'])->name('register.store');
+Route::get('login/store', [AuthController::class, 'login'])->name('login.store');
+
+// content
+Route::get('content', [AuthController::class, 'content'])->name('content');
+Route::get('qr-registraion/{slug}/{uid}', [QrRegisterController::class, 'qrRegister'])->name('qr-registration');
+
 Route::middleware('auth')->prefix('admin')->group(function () {
     // Dashboard route
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // NFC Tags routes
     Route::resource('nfc-tags', NfcTagController::class);
+    Route::resource('qr-register', QrRegisterController::class);
     // UID Mappings routes
     Route::resource('uid-mappings', UidMappingController::class);
     // NFC Access Logs routes

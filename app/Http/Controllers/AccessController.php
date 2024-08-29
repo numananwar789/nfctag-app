@@ -37,4 +37,6 @@ class AccessController extends Controller
         // Grant access
         return view('content', ['uid' => $uid]);
     }
+
+    
 }
